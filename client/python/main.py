@@ -320,10 +320,10 @@ def termPlayAPI():
             # key = sys.stdin.read(1)
             # termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
             
-            with open('resp.json', 'w') as f_obj:
-                f_obj.write(str(resp))
+            # with open('resp.json', 'w') as f_obj:
+            #     f_obj.write(str(resp))
 
-            action = ActionReq(gContext["playerID"], Num2ActionReq[random.randint(0, 4)])
+            action = ActionReq(gContext["playerID"], Num2ActionReq[0])
             
             # if key in key2ActionReq.keys():
             #     action = ActionReq(gContext["playerID"], key2ActionReq[key])
@@ -338,5 +338,5 @@ def termPlayAPI():
 
 
 if __name__ == "__main__":
-    # termPlayAPI()
-    main()
+    termPlayAPI()
+    # main()

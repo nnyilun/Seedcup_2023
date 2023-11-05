@@ -1,4 +1,5 @@
 seedcup2023-client-main.zip
-client/__pycache__/
+client/python/__pycache__/
+client/python/*.json
 bin/*.json
 bin/seedcup_*

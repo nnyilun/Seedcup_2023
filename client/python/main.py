@@ -33,8 +33,6 @@ gContext = {
     "gameBeginFlag": False,
 }
 
-resp = ''
-
 
 class Client(object):
     """Client obj that send/recv packet.
@@ -108,7 +106,6 @@ def cliGetInitReq():
 def recvAndRefresh(ui: UI, client: Client):
     """Recv packet and refresh ui."""
     global gContext
-    global resp
     resp = client.recv()
 
     if resp.type == PacketType.ActionResp:
@@ -147,147 +144,6 @@ key2ActionReq = {
 }
 
 
-class MapBlock:
-    Null = 0
-    Enemy = 1
-    PlayerSelf = 2
-    Wall = 3
-    Barrier = 4
-    BombCover = 5
-    HpItem = 6
-    InvincibleItem = 7
-    ShieldItem = 8
-    Unknown = 9
-
-
-Num2ActionReq = [
-    ActionType.SILENT,
-    ActionType.MOVE_LEFT,
-    ActionType.MOVE_RIGHT,
-    ActionType.MOVE_UP,
-    ActionType.MOVE_DOWN,
-    ActionType.PLACED,
-]
-
-
-class Bot:
-    """My silly bot"""
-
-    def __init__(self, client:Client=None, map_size:int=15) -> None:
-        """initialize game data"""
-        self.client = client
-        self.resp:ActionResp
-        self.map = [[[MapBlock.Null] for _ in range(map_size)] for _ in range(map_size)]
-        self.map_size = map_size
-        self.player_info:dict
-        self.player_id = -1
-        self.enemy_info:dict
-        self.enemy_id = -1
-
-    
-    def setPlayerId(self, player_id:int=1, enemy_id:int=0) -> None:
-        """DEBUG"""
-        self.player_id = player_id
-        self.enemy_id = enemy_id
-
-
-    def run(self) -> None:
-        """start game"""
-        pass
-
-
-    def updatePlayer(self, player:dict, pos:list) -> MapBlock:
-        """Parse the player data and return the current player"""
-        player_data = {
-            "alive": player["alive"],
-            "bomb_max_num": player["bomb_max_num"],
-            "bomb_now_num": player["bomb_now_num"],
-            "bomb_range": player["bomb_range"],
-            "hp": player["hp"],
-            "invincible_time": player["invincible_time"],
-            "score": player["score"],
-            "shield_time": player["shield_time"],
-            "speed": player["speed"],
-            "pos": pos
-        }
-
-        if player["player_id"] == self.player_id:
-            self.player_info = player_data
-            return MapBlock.PlayerSelf
-        elif player["player_id"] == self.enemy_id:
-            self.enemy_info = player_data
-            return MapBlock.Enemy
-        else:
-            assert False, 'updatePlayer: Player Id Error!'
-        
-
-    def getPLayersDistance(self):
-        """calculates the distance between players and returns two values: 
-            one is the distance including destructible blocks, 
-            and the other is the distance considering all as walls."""
-        pass
-
-
-    def updateMap(self, map_data:dict) -> dict:
-        """Update map and player positions"""
-        for cell in map_data:
-            x = cell['x']
-            y = cell['y']
-            
-            if not cell['objs']:
-                cell_content = [MapBlock.Null]
-            else:
-                cell_content = []
-                for obj in cell['objs']:
-                    if obj['type'] == ObjType.Player:
-                        cell_content.append(self.updatePlayer(obj["property"], [y, x]))
-
-                    elif obj['type'] == ObjType.Bomb:
-                        # The impact range of the bomb explosion
-                        bomb_range = obj["property"]["bomb_range"]
-
-                        for _x in range(x - bomb_range, x + bomb_range + 1):
-                            if MapBlock.Wall not in self.map[y][_x] and MapBlock.BombCover not in self.map[y][_x]:
-                                self.map[y][_x].append(MapBlock.BombCover)
-
-                        for _y in range(y - bomb_range, y + bomb_range + 1):
-                            if MapBlock.Wall not in self.map[_y][x] and MapBlock.BombCover not in self.map[_y][x]:
-                                self.map[_y][x].append(MapBlock.BombCover)
-
-                    elif obj['type'] == ObjType.Item:
-                        # TODO: process Item
-                        pass
-
-                    elif obj['type'] == ObjType.Block:
-                        if obj["property"]["removable"]:
-                            cell_content.append(MapBlock.Barrier)
-                        else:
-                            cell_content.append(MapBlock.Wall)
-
-                    else:
-                        cell_content.append(MapBlock.Unknown)  # Unknown Obj
-
-            self.map[y][x] += cell_content
-            if MapBlock.Null in self.map[y][x] and len(self.map[y][x]) > 1:
-                self.map[y][x].remove(MapBlock.Null)
-        
-        return self.map
-
-
-
-def main():
-    bot = Bot()
-    with open("resp.json", 'r') as f_obj:
-        resp = json.load(f_obj)
-
-    bot.setPlayerId()
-    result = bot.updateMap(resp['data']["map"])
-
-    for _ in result:
-        print(_)
-
-
-
 def termPlayAPI():
     ui = UI()
     
@@ -323,7 +179,8 @@ def termPlayAPI():
             # with open('resp.json', 'w') as f_obj:
             #     f_obj.write(str(resp))
 
-            action = ActionReq(gContext["playerID"], Num2ActionReq[0])
+            # keep silent!
+            action = ActionReq(gContext["playerID"], ActionType.SILENT)
             
             # if key in key2ActionReq.keys():
             #     action = ActionReq(gContext["playerID"], key2ActionReq[key])
@@ -339,4 +196,3 @@ def termPlayAPI():
 
 if __name__ == "__main__":
     termPlayAPI()
-    # main()

@@ -1,0 +1,2766 @@
+{
+    "data": {
+        "map": [
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 120,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 0,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 162,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 0,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 86,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 0,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 165,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 0,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 168,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 0,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 139,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 0,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 111,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 0,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 0,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 1,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 0,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 75,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 1,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 1,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 2,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 105,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 3,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 97,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 4,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 142,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 5,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 127,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 6,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 1,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 1,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 79,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 7,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 90,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 156,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 2,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 8,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 166,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 9,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 2,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 153,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 2,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 143,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 81,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 99,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 124,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 2,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 133,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 10,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 103,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 11,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 12,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 13,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 146,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 14,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 15,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 16,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 91,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 17,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 140,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 18,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 3,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 3,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 78,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 19,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 4,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 20,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 141,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 163,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 84,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 4,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 122,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 21,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 98,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 126,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 158,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 136,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 172,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 4,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 148,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 22,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 5,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 23,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 129,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 24,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 5,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 25,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 26,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 27,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 74,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 28,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 125,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 29,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 137,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 5,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 6,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 144,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 88,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 95,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 102,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 89,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 128,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 30,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 6,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 6,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 6,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 31,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 6,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 32,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 170,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 6,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 113,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 33,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 7,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 34,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 106,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 35,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 76,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 36,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 145,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 37,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 109,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 38,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 39,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 40,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 7,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 7,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 8,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 41,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 8,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 87,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 138,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 155,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 8,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 116,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 114,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 118,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 147,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 42,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 8,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 43,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 131,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 8,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 9,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 44,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 94,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 45,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 9,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 46,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 47,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 48,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 123,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 49,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 50,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 51,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 117,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 52,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 151,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 9,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 93,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 53,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 10,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 10,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 10,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 164,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 104,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 161,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 10,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 10,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 10,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 82,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 110,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 115,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 101,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 10,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 130,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 54,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 55,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 56,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 57,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 58,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 119,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 59,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 150,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 60,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 85,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 61,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 80,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 62,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 11,
+                "y": 13
+            },
+            {
+                "last_bomb_round": 9,
+                "objs": [],
+                "x": 11,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 149,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 134,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 12,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 63,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 108,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 83,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 92,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 64,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 152,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 12,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 77,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 159,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 169,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 12,
+                "y": 12
+            },
+            {
+                "last_bomb_round": 9,
+                "objs": [
+                    {
+                        "property": {
+                            "item_type": 2
+                        },
+                        "type": 4
+                    }
+                ],
+                "x": 12,
+                "y": 13
+            },
+            {
+                "last_bomb_round": 9,
+                "objs": [
+                    {
+                        "property": {
+                            "alive": true,
+                            "bomb_max_num": 2,
+                            "bomb_now_num": 0,
+                            "bomb_range": 1,
+                            "hp": 1,
+                            "invincible_time": 0,
+                            "player_id": 0,
+                            "score": 20,
+                            "shield_time": 0,
+                            "speed": 2
+                        },
+                        "type": 1
+                    }
+                ],
+                "x": 12,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "alive": true,
+                            "bomb_max_num": 2,
+                            "bomb_now_num": 0,
+                            "bomb_range": 1,
+                            "hp": 1,
+                            "invincible_time": 0,
+                            "player_id": 1,
+                            "score": 0,
+                            "shield_time": 0,
+                            "speed": 2
+                        },
+                        "type": 1
+                    }
+                ],
+                "x": 13,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 65,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 13,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 66,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 13,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 67,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 157,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 68,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 13,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 69,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 135,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 70,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 13,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 71,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 13,
+                "y": 13
+            },
+            {
+                "last_bomb_round": 9,
+                "objs": [],
+                "x": 13,
+                "y": 14
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 14,
+                "y": 0
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 14,
+                "y": 1
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 107,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 2
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 160,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 3
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 132,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 4
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 96,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 5
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 121,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 6
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 72,
+                            "removable": false
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 7
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 171,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 8
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 100,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 9
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 167,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 10
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 14,
+                "y": 11
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [
+                    {
+                        "property": {
+                            "block_id": 112,
+                            "removable": true
+                        },
+                        "type": 3
+                    }
+                ],
+                "x": 14,
+                "y": 12
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 14,
+                "y": 13
+            },
+            {
+                "last_bomb_round": -1,
+                "objs": [],
+                "x": 14,
+                "y": 14
+            }
+        ],
+        "player_id": 1,
+        "round": 10
+    },
+    "type": 3
+}

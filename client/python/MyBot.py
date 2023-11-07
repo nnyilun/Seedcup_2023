@@ -88,7 +88,7 @@ class Bot:
         self.client.send(initPacket)
 
 
-    def run(self, isTrain:bool=False, output:bool=False, showUi:bool=False):
+    def run(self, isTrain:bool=False, output:bool=False):
         assert self.client is not None, "Client does not exist!"
 
         # join the game and wait to start
@@ -99,12 +99,12 @@ class Bot:
             self.receive()
             sleep(0.1)
         
-        if showUi:
+        if self.ui:
             self.ui.player_id = self.player_id
 
         # game start
         while self.gameStatus == GameStatus.Starting:
-            if showUi:
+            if self.ui:
                 self.ui.refresh(self.resp.data)
                 self.ui.display()
 

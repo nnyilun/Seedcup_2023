@@ -47,10 +47,10 @@ class Client(object):
 
         # uncomment this will show resp packet
         # logger.info(f"recv PacketResp, content: {result}")
-        # packet = PacketResp().from_json(result)
 
-        return json.loads(result) # Don't serialize dictionary variables into classes
-
+        packet = PacketResp().from_json(result)
+        return packet
+        
     def __enter__(self):
         return self
     

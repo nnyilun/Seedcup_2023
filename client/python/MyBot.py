@@ -5,6 +5,7 @@ from base import *
 from req import *
 from resp import *
 from client import *
+from ui import UI
 from config import config
 from time import sleep
 
@@ -33,10 +34,12 @@ class GameStatus:
 class Bot:
     """My silly bot"""
 
-    def __init__(self, client:Client=None, map_size:int=15, actionNum:int=5) -> None:
+    def __init__(self, client:Client=None, map_size:int=15, actionNum:int=5, showUi:bool=False) -> None:
         """initialize game data"""
         self.client = client
         self.resp:ActionResp
+        if showUi:
+            self.ui = UI()
         self.gameStatus = GameStatus.Waiting
 
         self.map = [[[MapBlock.Null] for _ in range(map_size)] for _ in range(map_size)]
@@ -62,11 +65,13 @@ class Bot:
         """receive data from server"""
         self.resp = self.client.recv()
 
-        if self.gameStatus == GameStatus.Waiting and self.resp["type"] == PacketType.ActionResp:
+        if self.gameStatus == GameStatus.Waiting and self.resp.type == PacketType.ActionResp:
             self.gameStatus = GameStatus.Starting
-            self.player_id = self.resp["data"]["player_id"]
-        elif self.resp["type"] == PacketType.GameOver:
+            self.player_id = self.resp.data.player_id
+        elif self.resp.type == PacketType.GameOver:
             self.gameStatus = GameStatus.End
+
+        self.updateMap(self.resp.data.map)
     
 
     def setPlayerId(self, player_id:int=1, enemy_id:int=0) -> None:
@@ -83,7 +88,7 @@ class Bot:
         self.client.send(initPacket)
 
 
-    def run(self, isTrain:bool=False, output:bool=False):
+    def run(self, isTrain:bool=False, output:bool=False, showUi:bool=False):
         assert self.client is not None, "Client does not exist!"
 
         # join the game and wait to start
@@ -94,10 +99,17 @@ class Bot:
             self.receive()
             sleep(0.1)
         
+        if showUi:
+            self.ui.player_id = self.player_id
+
         # game start
         while self.gameStatus == GameStatus.Starting:
+            if showUi:
+                self.ui.refresh(self.resp.data)
+                self.ui.display()
+
             if output:
-                os.system('clear')
+                # os.system('clear')
                 self.printMap()
 
             state = self.getState()
@@ -110,7 +122,7 @@ class Bot:
         if output:
             self.printMap()
 
-        if self.player_id in self.resp["data"]["winner_ids"]:
+        if self.player_id in self.resp.data.winner_ids:
             self.gameStatus = GameStatus.Win
             print("Win!")
         else:
@@ -120,13 +132,13 @@ class Bot:
         if isTrain:
             self.learn()
 
-        print(f"Game over! Final scores: {self.resp['data']['scores']}")
+        print(f"Game over! Final scores: {self.resp.data.scores}")
 
 
     def getState(self) -> list:
         """Organize environmental data"""
-        self.updateMap(self.resp["data"]["map"])
         # TODO: simplified state parameters
+        pass
         return None
 
 
@@ -146,27 +158,27 @@ class Bot:
 
     def learn(self) -> None:
         """Judge the value and learn the action result"""
-        reward = self.player_info["score"] - self.previous_score
-        self.previous_score = self.player_info["score"]
+        reward = self.player_info.scores - self.previous_score
+        self.previous_score = self.player_info.scores
         pass
 
 
     def updatePlayer(self, player:dict, pos:list) -> MapBlock:
         """Parse the player data and return the current player"""
         player_data = {
-            "alive": player["alive"],
-            "bomb_max_num": player["bomb_max_num"],
-            "bomb_now_num": player["bomb_now_num"],
-            "bomb_range": player["bomb_range"],
-            "hp": player["hp"],
-            "invincible_time": player["invincible_time"],
-            "score": player["score"],
-            "shield_time": player["shield_time"],
-            "speed": player["speed"],
+            "alive": player.alive,
+            "bomb_max_num": player.bomb_max_num,
+            "bomb_now_num": player.bomb_now_num,
+            "bomb_range": player.bomb_range,
+            "hp": player.hp,
+            "invincible_time": player.invincible_time,
+            "score": player.score,
+            "shield_time": player.shield_time,
+            "speed": player.speed,
             "pos": pos
         }
 
-        if player["player_id"] == self.player_id:
+        if player.player_id == self.player_id:
             self.player_info = player_data
             return MapBlock.PlayerSelf
         else:
@@ -185,20 +197,20 @@ class Bot:
         """Update map and player positions"""
         self.map = [[[MapBlock.Null] for _ in range(self.map_size)] for _ in range(self.map_size)]
         for cell in map_data:
-            x = cell['x']
-            y = cell['y']
+            x = cell.x
+            y = cell.y
             
-            if not cell['objs']:
+            if not cell.objs:
                 cell_content = [MapBlock.Null]
             else:
                 cell_content = []
-                for obj in cell['objs']:
-                    if obj['type'] == ObjType.Player:
-                        cell_content.append(self.updatePlayer(obj["property"], [y, x]))
+                for obj in cell.objs:
+                    if obj.type == ObjType.Player:
+                        cell_content.append(self.updatePlayer(obj.property, [y, x]))
 
-                    elif obj['type'] == ObjType.Bomb:
+                    elif obj.type == ObjType.Bomb:
                         # The impact range of the bomb explosion
-                        bomb_range = obj["property"]["bomb_range"]
+                        bomb_range = obj.property.bomb_range
 
                         for _x in range(x - bomb_range, x + bomb_range + 1):
                             if 0 <= _x < self.map_size and MapBlock.Wall not in self.map[y][_x] and MapBlock.BombCover not in self.map[y][_x]:
@@ -208,12 +220,12 @@ class Bot:
                             if 0 <= _y < self.map_size and MapBlock.Wall not in self.map[_y][x] and MapBlock.BombCover not in self.map[_y][x]:
                                 self.map[x][_y].append(MapBlock.BombCover)
 
-                    elif obj['type'] == ObjType.Item:
+                    elif obj.type == ObjType.Item:
                         # TODO: process Item
                         pass
 
-                    elif obj['type'] == ObjType.Block:
-                        if obj["property"]["removable"]:
+                    elif obj.type == ObjType.Block:
+                        if obj.property.removable:
                             cell_content.append(MapBlock.Barrier)
                         else:
                             cell_content.append(MapBlock.Wall)
@@ -237,10 +249,10 @@ class Bot:
 def test():
     bot = Bot()
     with open("resp.json", 'r') as f_obj:
-        resp = json.load(f_obj)
+        resp = PacketResp().from_json(f_obj.read())
 
     bot.setPlayerId()
-    result = bot.updateMap(resp['data']["map"])
+    result = bot.updateMap(resp.data.map)
 
     for _ in result:
         print(_)
@@ -248,7 +260,7 @@ def test():
 
 def main():
     with Client() as client:
-        bot = Bot(client=client)
+        bot = Bot(client=client, showUi=True)
         bot.run(output=True)
 
 

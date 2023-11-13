@@ -11,16 +11,15 @@ import numpy as np
 from collections import deque
 
 
+TEAM_ID = '1'
+
+
 class MapBlock:
     Null = 0
-    Enemy = 1
-    PlayerSelf = 2
-    Wall = 3
-    Barrier = 4
-    BombCover = 5
-    HpItem = 6
-    InvincibleItem = 7
-    ShieldItem = 8
+    Wall = 1
+    Barrier = 2
+    BombCover = 3
+    Item = 4
 
 
 class GameStatus:
@@ -33,11 +32,15 @@ class GameStatus:
 
 class Bot:
     """My silly bot"""
-    def __init__(self, map_size:int=15, block_num:int=9, action_num:int=6, player_feature_num:int=11, bomb_base_time:int=5, show_ui:bool=False) -> None:
+    def __init__(
+            self, client:Client=None, 
+            map_size:int=15, block_num:int=5, action_num:int=6, 
+            player_feature_num:int=11, bomb_base_time:int=5, bomb_base_num:int=2,
+            show_ui:bool=False) -> None:
         """initialize game data"""
 
         # Game Infrastructure
-        self.client = None
+        self.client = client
         self.resp:ActionResp
         self.ui = None
         if show_ui:
@@ -50,6 +53,7 @@ class Bot:
         self.player_feature_num = player_feature_num
         self.map_size = map_size
         self.bomb_base_time = bomb_base_time
+        self.bomb_base_num = bomb_base_num
         self.Num2ActionReq = [
             ActionType.SILENT,
             ActionType.MOVE_LEFT,
@@ -77,9 +81,10 @@ class Bot:
         # Game Data
         self.round = 0
         self.bomb_timing = np.full((map_size, map_size), np.inf)
-        self.map = np.zeros((map_size, map_size, block_num))
+        self.map = np.zeros((map_size, map_size))
 
         self.previous_score:int = 0
+        self.bomb_now_num:int = 0
         self.player_info:dict
         self.player_info_array:np.array
         self.player_id = -1
@@ -118,7 +123,7 @@ class Bot:
         """join game"""
         self.client.connect()
         
-        initPacket = PacketReq(PacketType.InitReq, InitReq(config.get("player_name")))
+        initPacket = PacketReq(PacketType.InitReq, InitReq(TEAM_ID))
         self.client.send(initPacket)
 
 
@@ -167,7 +172,7 @@ class Bot:
             self.output(out)
 
             action1, action2 = self.choose_action()
-            print(f"action:{action1}, {action2 if action2 else None}")
+            print(f"action:{action1}, {action2 if action2 != None else None}")
             self.step(action1, action2)
 
             self.receive()
@@ -189,9 +194,10 @@ class Bot:
     def reset(self) -> None:
         self.gameStatus = GameStatus.Waiting
         self.round = 0
-        self.map = np.zeros((self.map_size, self.map_size, self.block_num))
+        self.map = np.zeros((self.map_size, self.map_size))
 
         self.previous_score:int = 0
+        self.bomb_now_num:int = self.bomb_base_num
         self.player_info:dict
         self.player_info_array:np.array
         self.player_id = -1
@@ -253,7 +259,7 @@ class Bot:
 
     def choose_action(self) -> (ActionType, ActionType | None):
         """Determine the behavior based on the current state"""
-        return self.Num2ActionReq[0], self.Num2ActionReq[0]
+        return self.Num2ActionReq[5], self.Num2ActionReq[5]
         return self.Num2ActionReq[random.randint(0, self.actionNum)]
 
 
@@ -272,21 +278,10 @@ class Bot:
         return ActionType.SILENT
 
 
-    def step(self, action1:ActionType, action2:ActionType=None) -> None:
+    def step(self, action1:ActionType, action2:ActionType=ActionType.SILENT) -> None:
         """Sending data to the server, making an action"""
-        action = ActionReq(self.player_id, action1)
-        actionPacket = PacketReq(PacketType.ActionReq, action)
+        actionPacket = PacketReq(PacketType.ActionReq, [ActionReq(self.player_id, action1), ActionReq(self.player_id, action2)])
         self.client.send(actionPacket)
-        
-        if action2:
-            action = ActionReq(self.player_id, action2)
-            actionPacket = PacketReq(PacketType.ActionReq, action)
-            self.client.send(actionPacket)
-
-
-    def learn(self) -> None:
-        """Judge the value and learn the action result"""
-        pass
 
 
     def getReward(self, action1:ActionType, action2:ActionType, isDone:bool=False) -> int:
@@ -298,9 +293,13 @@ class Bot:
         else:
             reward = self.player_info['score'] - self.previous_score
             self.previous_score = self.player_info['score'] 
-            if action1 == ActionType.PLACED or action2 == ActionType.PLACED:
-                return 20
-            if reward == 0:
+            if self.player_info["bomb_now_num"] > self.bomb_now_num:
+                self.bomb_num = self.player_info["bomb_now_num"]
+                return 2000
+            elif self.player_info["bomb_now_num"] < self.bomb_now_num:
+                self.bomb_num = self.player_info["bomb_now_num"]
+                return 10
+            elif reward == 0:
                 return -5
         return reward
 
@@ -308,6 +307,8 @@ class Bot:
     def updatePlayer(self, player:dict, pos:list) -> MapBlock:
         """Parse the player data and return the current player"""
         player_data = {
+            "id": player.player_id,
+            "pos": pos,
             "alive": player.alive,
             "bomb_max_num": player.bomb_max_num,
             "bomb_now_num": player.bomb_now_num,
@@ -317,19 +318,24 @@ class Bot:
             "score": player.score,
             "shield_time": player.shield_time,
             "speed": player.speed,
-            "pos": pos
         }
 
-        values = list(player_data.values())
-        values.extend(values.pop())
+        values = np.array([
+                            player.player_id, 
+                            pos[0], pos[1], 
+                            player.alive, 
+                            player.hp,
+                            player.bomb_max_num, player.bomb_now_num, player.bomb_range,
+                            player.invincible_time, player.shield_time, player.speed,
+                        ])
 
         if player.player_id == self.player_id:
             self.player_info = player_data
-            self.player_info_array = np.array(values)
+            self.player_info_array = values
             return MapBlock.PlayerSelf
         else:
             self.enemy_info = player_data
-            self.enemy_info_array = np.array(values)
+            self.enemy_info_array = values
             return MapBlock.Enemy
         
 

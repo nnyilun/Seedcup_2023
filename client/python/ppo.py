@@ -6,57 +6,100 @@ from torch.distributions import Categorical
 from collections import deque
 
 # Actor-Critic
+# class ActorCritic(nn.Module):
+#     def __init__(self, num_inputs, num_actions, num_player_features):
+#         super(ActorCritic, self).__init__()
+#         # process map data
+#         self.conv_layers = nn.Sequential(
+#             nn.Conv2d(num_inputs, 32, kernel_size=3, stride=1, padding=1),
+#             nn.ReLU(),
+#             nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
+#             nn.ReLU(),
+#             nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
+#             nn.ReLU(),
+#             nn.Flatten(),
+#         )
+
+#         # process each player
+#         self.fc_player1 = nn.Sequential(
+#             nn.Linear(num_player_features, 16),
+#             nn.ReLU()
+#         )
+#         self.fc_player2 = nn.Sequential(
+#             nn.Linear(num_player_features, 16),
+#             nn.ReLU()
+#         )
+
+#         # combine two players info and map data
+#         combined_size = 64 * 15 * 15 + 16 * 2
+
+#         self.actor = nn.Sequential(
+#             nn.Linear(combined_size, 512),
+#             nn.ReLU(),
+#             nn.Linear(512, num_actions),
+#             nn.Softmax(dim=-1)
+#         )
+
+#         self.critic = nn.Sequential(
+#             nn.Linear(combined_size, 512),
+#             nn.ReLU(),
+#             nn.Linear(512, 1)
+#         )
+
+
+#     def forward(self, map_state, player1_features, player2_features):
+#         map_state = self.conv_layers(map_state)
+#         map_state = map_state.view(map_state.size(0), -1)  # flatten conv layer
+
+#         player1_features = self.fc_player1(player1_features)
+#         player2_features = self.fc_player2(player2_features)
+
+#         combined_features = torch.cat((map_state, player1_features, player2_features), dim=1)
+
+#         return self.actor(combined_features), self.critic(combined_features)
+
+
 class ActorCritic(nn.Module):
-    def __init__(self, num_inputs, num_actions, num_player_features):
+    def __init__(self, num_actions:int, map_chanel:int, player_feature_num:int):
         super(ActorCritic, self).__init__()
-        # process map data
+
+        # 卷积层用于处理地图
         self.conv_layers = nn.Sequential(
-            nn.Conv2d(num_inputs, 32, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(map_chanel, 32, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
             nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
-            nn.ReLU(),
-            nn.Flatten(),
+            nn.Flatten()
         )
 
-        # process each player
-        self.fc_player1 = nn.Sequential(
-            nn.Linear(num_player_features, 16),
-            nn.ReLU()
-        )
-        self.fc_player2 = nn.Sequential(
-            nn.Linear(num_player_features, 16),
+        # 全连接层用于处理玩家信息
+        self.fc_player = nn.Sequential(
+            nn.Linear(player_feature_num, 128),  # 假设有11个玩家特征
             nn.ReLU()
         )
 
-        # combine two players info and map data
-        combined_size = 64 * 15 * 15 + 16 * 2
-
+        # 合并层
+        combined_size = 64 * 15 * 15 + 128
         self.actor = nn.Sequential(
             nn.Linear(combined_size, 512),
             nn.ReLU(),
             nn.Linear(512, num_actions),
             nn.Softmax(dim=-1)
         )
-
+        
         self.critic = nn.Sequential(
             nn.Linear(combined_size, 512),
             nn.ReLU(),
             nn.Linear(512, 1)
         )
 
-
-    def forward(self, map_state, player1_features, player2_features):
+    def forward(self, map_state, player_info):
         map_state = self.conv_layers(map_state)
-        map_state = map_state.view(map_state.size(0), -1)  # flatten conv layer
+        player_info = self.fc_player(player_info)
+        combined = torch.cat((map_state, player_info), dim=1)
 
-        player1_features = self.fc_player1(player1_features)
-        player2_features = self.fc_player2(player2_features)
+        return self.actor(combined), self.critic(combined)
 
-        combined_features = torch.cat((map_state, player1_features, player2_features), dim=1)
-
-        return self.actor(combined_features), self.critic(combined_features)
 
 
 

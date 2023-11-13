@@ -70,7 +70,6 @@ class Bot:
             ActionType.MOVE_DOWN : "MOVE_DOWN",
             ActionType.PLACED : "PLACED",
         }
-        self.DIRECTIONS = [(0, 1), (1, 0), (0, -1), (-1, 0)] # search directions 
 
         # PPO agent
         self.memory = deque()
@@ -79,8 +78,6 @@ class Bot:
         self.agent = PPOAgent(block_num, action_num, player_feature_num)
 
         # Game Data
-        self.round = 0
-        self.bomb_timing = np.full((map_size, map_size), np.inf)
         self.map = np.zeros((map_size, map_size))
 
         self.previous_score:int = 0
@@ -107,16 +104,6 @@ class Bot:
         
         self.round = self.resp.data.round
         self.updateMap(self.resp.data.map)
-    
-
-    def setPlayerId(self, player_id:int=1, enemy_id:int=0) -> None:
-        """for DEBUG"""
-        self.player_id = player_id
-        self.enemy_id = enemy_id
-
-    
-    def setCLient(self, client:Client=None) -> None:
-        self.client = client
 
 
     def joinGame(self) -> None:
@@ -159,32 +146,6 @@ class Bot:
 
         if out:
             self.printMap()
-
-    def run(self, isTrain:bool=False, out:bool=False):
-        assert self.client is not None, "Client does not exist!"
-
-        # join the game and wait to start
-        self.joinGame()
-        self.waitToStart()
-
-        # game start
-        while self.gameStatus == GameStatus.Starting:
-            self.output(out)
-
-            action1, action2 = self.choose_action()
-            print(f"action:{action1}, {action2 if action2 != None else None}")
-            self.step(action1, action2)
-
-            self.receive()
-            if isTrain:
-                self.learn()
-
-        self.output(out)
-
-        if isTrain:
-            self.learn()
-
-        self.gameOver()
 
 
     def isDone(self) -> bool:
@@ -251,33 +212,6 @@ class Bot:
             self.memory.clear()
 
 
-    def getState(self) -> np.array:
-        """Organize environmental data"""
-        # TODO: simplified state parameters
-        return self.map
-
-
-    def choose_action(self) -> (ActionType, ActionType | None):
-        """Determine the behavior based on the current state"""
-        return self.Num2ActionReq[5], self.Num2ActionReq[5]
-        return self.Num2ActionReq[random.randint(0, self.actionNum)]
-
-
-    def get_move_from_path(self, start:tuple, end:tuple) -> ActionType:
-        """decide direction"""
-        x0, y0 = start
-        x1, y1 = end
-        if x1 < x0:
-            return ActionType.MOVE_UP
-        elif x1 > x0:
-            return ActionType.MOVE_DOWN
-        elif y1 < y0:
-            return ActionType.MOVE_LEFT
-        elif y1 > y0:
-            return ActionType.MOVE_RIGHT
-        return ActionType.SILENT
-
-
     def step(self, action1:ActionType, action2:ActionType=ActionType.SILENT) -> None:
         """Sending data to the server, making an action"""
         actionPacket = PacketReq(PacketType.ActionReq, [ActionReq(self.player_id, action1), ActionReq(self.player_id, action2)])
@@ -337,175 +271,55 @@ class Bot:
             self.enemy_info = player_data
             self.enemy_info_array = values
             return MapBlock.Enemy
-        
-
-    def getPLayersDistance(self):
-        """calculates the distance between players and returns two values: 
-            one is the distance including destructible blocks, 
-            and the other is the distance considering all as walls."""
-        pass
-
-
-    def bfs(self, start:tuple, max_depth:int=None) -> None:
-        pass
-
-
-    # def bfs(self, start, target_check, max_depth=None):
-    #     """
-    #     BFS is used for path planning.
-    #     start: The starting point (x, y)
-    #     target_check: A function that checks whether the current position is a target or not
-    #     max_depth: The maximum depth of the search
-    #     """
-    #     visited = set()  # Visited collections
-    #     queue = deque([(start, [], 0)])  # Store tuples in queue: (current position, path, current depth)
-
-    #     while queue:
-    #         (x, y), path, depth = queue.popleft()
-    #         if (x, y) in visited:
-    #             continue
-
-    #         visited.add((x, y))
-
-    #         if target_check(self.game_map[x, y, :]):  # Checks if the current location is the target
-    #             return path + [(x, y)]
-
-    #         if max_depth is not None and depth >= max_depth:  # Check the depth limit
-    #             continue
-
-    #         # Add adjacent walkable nodes to the queue
-    #         for dx, dy in self.DIRECTIONS:
-    #             nx, ny = x + dx, y + dy
-    #             if 0 <= nx < self.map_size and 0 <= ny < self.map_size and (nx, ny) not in visited:
-    #                 # Make sure the next position can be moved
-    #                 if self.game_map[nx, ny, MapBlock.Wall] == 0 and self.game_map[nx, ny, MapBlock.Barrier] == 0:
-    #                     queue.append(((nx, ny), path + [(x, y)], depth + 1))
-
-    #     return None  # can't find target
-    
-
-    # def bfs_with_two_steps(self, start, target_check, bomb_timing, max_depth=None) -> list | None:
-    #     """Consider that each turn can move two steps"""
-    #     visited = set()
-    #     queue = deque([(start, [], 0, 0, 0)])  # Store tuples in queue: (current position, path, current depth, time, step)
-
-    #     while queue:
-    #         print(len(queue), len(visited))
-    #         (x, y), path, depth, time, steps = queue.popleft()
-    #         state = (x, y)
-    #         if state in visited:
-    #             continue
-
-    #         visited.add(state)
-
-    #         if target_check(self.map[x, y, :], time):
-    #             return path + [(x, y)]
-
-    #         if max_depth is not None and depth >= max_depth:
-    #             continue
-
-    #         for dx, dy in self.DIRECTIONS:
-    #             nx, ny = x + dx, y + dy
-    #             next_time = time + (steps // 2)
-    #             next_steps = (steps + 1) % 2
-
-    #             # reset step and add time
-    #             if next_steps == 0:
-    #                 next_time += 1
-
-    #             if 0 <= nx < self.map_size and 0 <= ny < self.map_size and (nx, ny, next_time, next_steps) not in visited:
-    #                 if self.is_safe_to_move(self.map[nx, ny], next_time):
-    #                     queue.append(((nx, ny), path + [(x, y)], depth + 1, next_time, next_steps))
-
-    #     return None
-    
-    # Define different target checking functions
-    def is_enemy(self, block:np.array, time:int) -> bool:
-        return block[MapBlock.Enemy] == 1
-
-    def is_item(self, block:np.array, time:int) -> bool:
-        return np.any(block[MapBlock.HpItem : MapBlock.ShieldItem + 1])
-
-    def is_safe_to_move(self, block:np.array, time:int) -> bool:
-        """Checks if the player can safely move to a block at a given time."""
-        is_bomb_active = block[MapBlock.BombCover] and time < self.bomb_timing[block[MapBlock.BombCover]]
-        can_move = block[MapBlock.Wall] == 0 and block[MapBlock.Barrier] == 0
-        return can_move and not is_bomb_active
 
 
     def updateMap(self, map_data:dict) -> dict:
         """Update map and player positions"""
-        self.map = np.zeros((self.map_size, self.map_size, self.block_num))
+        self.map = np.zeros((self.map_size, self.map_size))
         self.update_bomb_timers()
         for cell in map_data:
             x = cell.x
             y = cell.y
             
             if not cell.objs:
-                self.map[x, y, MapBlock.Null] = 1
+                self.map[x, y] = MapBlock.Null
             else:
                 for obj in cell.objs:
                     if obj.type == ObjType.Player:
-                        self.map[x, y, self.updatePlayer(obj.property, [x, y])]
+                        self.updatePlayer(obj.property, [x, y])
 
                     elif obj.type == ObjType.Bomb:
                         # The impact range of the bomb explosion
                         bomb_range = obj.property.bomb_range
 
                         for _x in range(x - bomb_range, x + bomb_range + 1):
-                            if 0 <= _x < self.map_size and self.map[_x, y, MapBlock.Wall] != 1 and self.map[_x, y, MapBlock.BombCover] != 1:
-                                self.map[_x, y, MapBlock.BombCover] = 1
-                                self.bomb_timing[_x, y] = min(self.bomb_timing[_x, y], self.bomb_base_time)
-                                if self.bomb_timing[_x, y] == 0:
-                                    self.bomb_timing[_x, y] = 1
+                            if 0 <= _x < self.map_size and self.map[_x, y] != MapBlock.Wall and self.map[_x, y] != MapBlock.Barrier:
+                                self.map[_x, y] = MapBlock.BombCover
 
                         for _y in range(y - bomb_range, y + bomb_range + 1):
-                            if 0 <= _y < self.map_size and self.map[x, _y, MapBlock.Wall] != 1 and self.map[x, _y, MapBlock.BombCover] != 1:
-                                self.map[x, _y, MapBlock.BombCover] = 1
-                                self.bomb_timing[x, _y] = min(self.bomb_timing[x, _y], self.bomb_base_time)
-                                if self.bomb_timing[x, _y] == 0:
-                                    self.bomb_timing[x, _y] = 1
+                            if 0 <= _y < self.map_size and self.map[x, _y] != MapBlock.Wall and self.map[x, _y] != MapBlock.Barrier:
+                                self.map[x, _y] = MapBlock.BombCover
 
                     elif obj.type == ObjType.Item:
-                        # TODO: process Item
-                        pass
+                        self.map[x, y] = MapBlock.Item
 
                     elif obj.type == ObjType.Block:
                         if obj.property.removable:
-                            self.map[x, y, MapBlock.Barrier] = 1
+                            self.map[x, y] = MapBlock.Barrier
                         else:
-                            self.map[x, y, MapBlock.Wall] = 1
+                            self.map[x, y] = MapBlock.Wall
 
                     else:
                         assert False, "Unknown Block Object!"
 
         return self.map
-
-
-    def update_bomb_timers(self):
-        """update bomb timers"""
-        ### 注意：当两个炸弹覆盖同一块区域，计算炸弹剩余时间的代码可能会出问题
-        self.bomb_timing[self.bomb_timing < np.inf] -= 1
-        self.bomb_timing[self.bomb_timing < 0] = np.inf
-
     
+
     def printMap(self) -> None:
         for _ in self.map:
             for __ in _:
                 print(__)
             print('')
-
-
-def test():
-    bot = Bot()
-    with open("resp.json", 'r') as f_obj:
-        resp = PacketResp().from_json(f_obj.read())
-
-    bot.setPlayerId()
-    result = bot.updateMap(resp.data.map)
-
-    for _ in result:
-        print(_)
 
 
 def main():

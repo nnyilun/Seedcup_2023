@@ -52,13 +52,19 @@ class JsonBase(object):
     def __setattr__(self, key: str, value: Any) -> None:
         if hasattr(value, "to_json"):
             self._json[key] = value.to_json()
+        
+        elif isinstance(value, list):
+            if len(value) > 0 and hasattr(value[0], "to_json"):
+                self._json[key] = [v.to_json() for v in value]
+            else:
+                self._json[key] = [v for v in value]
+        
         else:
             self._json[key] = value
         super().__setattr__(key, value)
 
     def __repr__(self) -> str:
-        # format print
-        return json.dumps(self._json, cls=JsonEncoder, indent=4, sort_keys=True)
+        return json.dumps(self._json, cls=JsonEncoder)
 
     def __str__(self) -> str:
         return self.__repr__()

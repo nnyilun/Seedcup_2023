@@ -1,6 +1,5 @@
 import json
 import socket
-import random
 from base import *
 from req import *
 from resp import *
@@ -14,8 +13,8 @@ from time import sleep
 from logger import logger
 
 import sys
-import termios
-import tty
+
+TEAM_ID = 'uoft05Yl9EkWErzqNFQVGIEBL3UEPR3TxuWM3ErOHI0='
 
 # record the context of global data
 gContext = {
@@ -37,6 +36,7 @@ gContext = {
 class Client(object):
     """Client obj that send/recv packet.
     """
+
     def __init__(self) -> None:
         self.config = config
         self.host = self.config.get("host")
@@ -72,7 +72,7 @@ class Client(object):
                 break
 
         # uncomment this will show resp packet
-        # logger.info(f"recv PacketResp, content: {result}")
+        logger.info(f"recv PacketResp, content: {result}")
         packet = PacketResp().from_json(result)
         return packet
 
@@ -99,8 +99,7 @@ class Client(object):
 
 def cliGetInitReq():
     """Get init request from user input."""
-    # input("enter to start!")
-    return InitReq(config.get("player_name"))
+    return InitReq(TEAM_ID)
 
 
 def recvAndRefresh(ui: UI, client: Client):
@@ -113,8 +112,9 @@ def recvAndRefresh(ui: UI, client: Client):
         gContext["playerID"] = resp.data.player_id
         ui.player_id = gContext["playerID"]
 
+
     while resp.type != PacketType.GameOver:
-        # subprocess.run(["clear"])
+        subprocess.run(["clear"])
         ui.refresh(resp.data)
         ui.display()
         resp = client.recv()
@@ -143,7 +143,6 @@ key2ActionReq = {
     ' ': ActionType.PLACED,
 }
 
-
 def termPlayAPI():
     ui = UI()
     
@@ -152,7 +151,7 @@ def termPlayAPI():
         
         initPacket = PacketReq(PacketType.InitReq, cliGetInitReq())
         client.send(initPacket)
-
+        
         # IO thread to display UI
         t = Thread(target=recvAndRefresh, args=(ui, client))
         t.start()
@@ -168,29 +167,13 @@ def termPlayAPI():
             )
             sleep(0.1)
 
-        # starting game!!!
         while not gContext["gameOverFlag"]:
-            # key = scr.getch()
-            # old_settings = termios.tcgetattr(sys.stdin)
-            # tty.setcbreak(sys.stdin.fileno())
-            # key = sys.stdin.read(1)
-            # termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
-            
-            # with open('resp.json', 'w') as f_obj:
-            #     f_obj.write(str(resp))
-
-            # keep silent!
-            action = ActionReq(gContext["playerID"], ActionType.SILENT)
-            
-            # if key in key2ActionReq.keys():
-            #     action = ActionReq(gContext["playerID"], key2ActionReq[key])
-            # else:
-            #     action = ActionReq(gContext["playerID"], ActionType.SILENT)
+            action = ActionReq(gContext["playerID"], ActionType.PLACED)
             
             if gContext["gameOverFlag"]:
                 break
             
-            actionPacket = PacketReq(PacketType.ActionReq, action)
+            actionPacket = PacketReq(PacketType.ActionReq, [action, action])
             client.send(actionPacket)
 
 

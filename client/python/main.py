@@ -14,7 +14,7 @@ from logger import logger
 
 import sys
 
-TEAM_ID = 'uoft05Yl9EkWErzqNFQVGIEBL3UEPR3TxuWM3ErOHI0='
+TEAM_ID = '1'
 
 # record the context of global data
 gContext = {

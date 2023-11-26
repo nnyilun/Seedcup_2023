@@ -6,100 +6,57 @@ from torch.distributions import Categorical
 from collections import deque
 
 # Actor-Critic
-# class ActorCritic(nn.Module):
-#     def __init__(self, num_inputs, num_actions, num_player_features):
-#         super(ActorCritic, self).__init__()
-#         # process map data
-#         self.conv_layers = nn.Sequential(
-#             nn.Conv2d(num_inputs, 32, kernel_size=3, stride=1, padding=1),
-#             nn.ReLU(),
-#             nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
-#             nn.ReLU(),
-#             nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
-#             nn.ReLU(),
-#             nn.Flatten(),
-#         )
-
-#         # process each player
-#         self.fc_player1 = nn.Sequential(
-#             nn.Linear(num_player_features, 16),
-#             nn.ReLU()
-#         )
-#         self.fc_player2 = nn.Sequential(
-#             nn.Linear(num_player_features, 16),
-#             nn.ReLU()
-#         )
-
-#         # combine two players info and map data
-#         combined_size = 64 * 15 * 15 + 16 * 2
-
-#         self.actor = nn.Sequential(
-#             nn.Linear(combined_size, 512),
-#             nn.ReLU(),
-#             nn.Linear(512, num_actions),
-#             nn.Softmax(dim=-1)
-#         )
-
-#         self.critic = nn.Sequential(
-#             nn.Linear(combined_size, 512),
-#             nn.ReLU(),
-#             nn.Linear(512, 1)
-#         )
-
-
-#     def forward(self, map_state, player1_features, player2_features):
-#         map_state = self.conv_layers(map_state)
-#         map_state = map_state.view(map_state.size(0), -1)  # flatten conv layer
-
-#         player1_features = self.fc_player1(player1_features)
-#         player2_features = self.fc_player2(player2_features)
-
-#         combined_features = torch.cat((map_state, player1_features, player2_features), dim=1)
-
-#         return self.actor(combined_features), self.critic(combined_features)
-
-
 class ActorCritic(nn.Module):
-    def __init__(self, num_actions:int, map_chanel:int, player_feature_num:int):
+    def __init__(self, num_inputs, num_actions, num_player_features):
         super(ActorCritic, self).__init__()
-
-        # 卷积层用于处理地图
+        # process map data
         self.conv_layers = nn.Sequential(
-            nn.Conv2d(map_chanel, 32, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(num_inputs, 32, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
             nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            nn.Flatten()
+            nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1),
+            nn.ReLU(),
+            nn.Flatten(),
         )
 
-        # 全连接层用于处理玩家信息
-        self.fc_player = nn.Sequential(
-            nn.Linear(player_feature_num, 128),  # 假设有11个玩家特征
+        # process each player
+        self.fc_player1 = nn.Sequential(
+            nn.Linear(num_player_features, 128),
+            nn.ReLU()
+        )
+        self.fc_player2 = nn.Sequential(
+            nn.Linear(num_player_features, 128),
             nn.ReLU()
         )
 
-        # 合并层
-        combined_size = 64 * 15 * 15 + 128
+        # combine two players info and map data
+        combined_size = 64 * 15 * 15 + 128 * 2
+
         self.actor = nn.Sequential(
             nn.Linear(combined_size, 512),
             nn.ReLU(),
             nn.Linear(512, num_actions),
             nn.Softmax(dim=-1)
         )
-        
+
         self.critic = nn.Sequential(
             nn.Linear(combined_size, 512),
             nn.ReLU(),
             nn.Linear(512, 1)
         )
 
-    def forward(self, map_state, player_info):
+
+    def forward(self, map_state, player1_features, player2_features):
         map_state = self.conv_layers(map_state)
-        player_info = self.fc_player(player_info)
-        combined = torch.cat((map_state, player_info), dim=1)
+        map_state = map_state.view(map_state.size(0), -1)  # flatten conv layer
 
-        return self.actor(combined), self.critic(combined)
+        player1_features = self.fc_player1(player1_features)
+        player2_features = self.fc_player2(player2_features)
 
+        combined_features = torch.cat((map_state, player1_features, player2_features), dim=1)
+
+        return self.actor(combined_features), self.critic(combined_features)
 
 
 
@@ -147,38 +104,6 @@ class PPOAgent:
             advs.insert(0, last_gae_lam)
         return advs
 
-    def ppo_update1(self, states, actions, log_probs, returns, advantages, actor_critic, optimizer, ppo_epochs, mini_batch_size, ppo_clip):
-        for _ in range(ppo_epochs):
-            idx = np.arange(len(states))
-            np.random.shuffle(idx)
-
-            for i in range(0, len(states), mini_batch_size):
-                ind = idx[i:i + mini_batch_size]
-
-                states_mb = torch.stack(states)[ind]
-                actions_mb = torch.tensor(actions)[ind]
-                log_probs_mb = torch.stack(log_probs)[ind]
-                returns_mb = torch.stack(returns)[ind]
-                advantages_mb = torch.stack(advantages)[ind]
-
-                # Evaluate current policy's log prob and state values
-                new_log_probs, state_values = actor_critic(states_mb)
-                new_log_probs = new_log_probs.gather(1, actions_mb.unsqueeze(1)).squeeze(1)
-                
-                # Calculate the ratio (pi_theta / pi_theta__old):
-                ratios = torch.exp(new_log_probs - log_probs_mb)
-                
-                # Calculate Surrogate Loss:
-                surr1 = ratios * advantages_mb
-                surr2 = torch.clamp(ratios, 1 - ppo_clip, 1 + ppo_clip) * advantages_mb
-                actor_loss = -torch.min(surr1, surr2).mean()
-                critic_loss = (returns_mb - state_values).pow(2).mean()
-
-                # Calculate gradients and perform PPO update
-                optimizer.zero_grad()
-                loss = actor_loss + 0.5 * critic_loss
-                loss.backward()
-                optimizer.step()
 
     def ppo_update(self, states, actions, log_probs, returns, advantages, player1_features, player2_features, actor_critic, optimizer, ppo_epochs, mini_batch_size, ppo_clip):
         for _ in range(ppo_epochs):
@@ -214,25 +139,6 @@ class PPOAgent:
                 loss = actor_loss + 0.5 * critic_loss
                 loss.backward()
                 optimizer.step()
-
-
-    def train1(self, memory):
-        # Extract from memory
-        batch = list(zip(*memory))
-        states, actions, rewards, next_states, log_probs, values, dones = batch
-
-        # Calculate advantages
-        advantages = self.compute_advantages(rewards, values, dones, gamma=self.gamma, lam=self.gae_lambda)
-
-        # Calculate returns (target value for the value function)
-        returns = []
-        R = values[-1]
-        for step in reversed(range(len(rewards))):
-            R = rewards[step] + self.gamma * R * (1 - dones[step])
-            returns.insert(0, R)
-        
-        # Perform PPO update
-        self.ppo_update(states, actions, log_probs, returns, advantages, self.actor_critic, self.optimizer, ppo_epochs=4, mini_batch_size=64, ppo_clip=self.ppo_clip)
 
     
     def train(self, memory):

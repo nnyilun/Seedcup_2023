@@ -14,7 +14,7 @@ from logger import logger
 
 import sys
 
-TEAM_ID = '1'
+TEAM_ID = 'uoft05Yl9EkWErzqNFQVGIEBL3UEPR3TxuWM3ErOHI0='
 
 # record the context of global data
 gContext = {
@@ -168,7 +168,7 @@ def termPlayAPI():
             sleep(0.1)
 
         while not gContext["gameOverFlag"]:
-            action = ActionReq(gContext["playerID"], ActionType.PLACED)
+            action = ActionReq(gContext["playerID"], ActionType.SILENT)
             
             if gContext["gameOverFlag"]:
                 break

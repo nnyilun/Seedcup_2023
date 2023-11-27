@@ -3,10 +3,10 @@ from req import *
 from resp import *
 from client import *
 from ui import UI
-from config import config
 import random
 from time import sleep
 import numpy as np
+from collections import deque
 
 
 TEAM_ID = '1'
@@ -157,7 +157,7 @@ class Bot:
         if out:
             self.printMap()
 
-    def run(self, isTrain:bool=False, out:bool=False):
+    def run(self, out:bool=False):
         assert self.client is not None, "Client does not exist!"
 
         # join the game and wait to start
@@ -173,13 +173,8 @@ class Bot:
             self.step(action1, action2)
 
             self.receive()
-            if isTrain:
-                self.learn()
 
         self.output(out)
-
-        if isTrain:
-            self.learn()
 
         self.gameOver()
 
@@ -190,8 +185,18 @@ class Bot:
 
     def choose_action(self) -> (ActionType, ActionType | None):
         """Determine the behavior based on the current state"""
-        return self.Num2ActionReq[5], self.Num2ActionReq[5]
-        return self.Num2ActionReq[random.randint(0, self.actionNum)]
+        safe_zone = self.markSafe()
+        can_place_bomb = self.simulate(safe_zone)
+        print(f'can_place_bomb:{can_place_bomb}')
+        
+        if len(can_place_bomb) == 0:
+            return self.Num2ActionReq[0], self.Num2ActionReq[0]
+
+        max_value_pos = max(can_place_bomb, key=lambda x:x[1])
+        path = self.goToTarget(max_value_pos[0])
+        print(f'path:{path}')
+        return self.get_move_from_path(path[0], path[1]), ActionType.PLACED
+        return self.Num2ActionReq[0], self.Num2ActionReq[0]
 
 
     def get_move_from_path(self, start:tuple, end:tuple) -> ActionType:
@@ -244,12 +249,10 @@ class Bot:
         }
 
         if player.player_id == self.player_id:
-            print(f"player_id: {self.player_id}")
             self.player_info = player_data
             return MapBlock.PlayerSelf
         else:
             self.enemy_id = player.player_id
-            print(f"enemy_id: {self.enemy_id}")
             self.enemy_info = player_data
             return MapBlock.Enemy
         
@@ -261,9 +264,106 @@ class Bot:
         pass
 
 
-    def bfs(self, start:tuple, max_depth:int=None) -> None:
-        pass
+    def markSafe(self, step:int=5) -> set:
+        start = self.player_info['pos']
+        que = deque([(start, [])])
+        ret = set()
+        visited = set()
 
+        while len(que):
+            (x, y), path = que.popleft()
+            for dx, dy in self.DIRECTIONS:
+                _x, _y = x + dx, y + dy
+
+                if 0 <= _x < self.map_size and 0 <= _y < self.map_size and self.map[_x, _y, MapBlock.BombCover] + self.map[_x, _y, MapBlock.Wall] + self.map[_x, _y, MapBlock.Barrier] == 0:
+                    if step - len(path) <= 1:
+                        continue
+                    que.append(((_x, _y), path + [(x, y)]))
+                    ret.add((_x, _y))
+                    visited.add((_x, _y))
+
+        return ret
+    
+
+    def simulate(self, SafeZone:set) -> list:
+        if self.player_info["bomb_max_num"] - self.player_info["bomb_now_num"] <= 0:
+            return
+
+        map = np.zeros((self.map_size, self.map_size))
+        for (x, y) in SafeZone:
+            map[x, y] = 1
+
+        result = []
+        temp_map = map.copy()
+        start = self.player_info["pos"]
+        bomb_range = self.player_info["bomb_range"]
+        cnt = 0
+        # place here
+        for _x in range(start[0] - bomb_range, start[0] + bomb_range + 1):
+            if 0 <= _x < self.map_size:
+                temp_map[_x, start[1]] = 0
+                if self.map[_x, start[1], MapBlock.Barrier] == 1:
+                    cnt += 1
+
+        for _y in range(start[1] - bomb_range, start[1] + bomb_range + 1):
+            if 0 <= _y < self.map_size:
+                temp_map[start[0], _y] = 0
+                if self.map[start[0], _y, MapBlock.Barrier] == 1:
+                    cnt += 1
+        
+        if np.sum(temp_map) > 0 and cnt != 0:
+            coordinates = np.where(temp_map == 1)
+            print(f'coor:{coordinates}, list:{list(zip(coordinates[0], coordinates[1]))}')
+            result.append((start, cnt, list(zip(coordinates[0], coordinates[1]))))
+
+        # place one step range
+        for (dx, dy) in self.DIRECTIONS:
+            temp_map = map.copy()
+            cnt = 0
+            _x, _y = start[0] + dx, start[1] + dy
+            print(f'_x:{_x}, _y:{_y}')
+            if 0 <= _x < self.map_size and 0 <= _y < self.map_size:
+                for __x in range(_x - bomb_range, _x + bomb_range + 1):
+                    if 0 <= __x < self.map_size:
+                        temp_map[__x, _y] = 0
+                        if self.map[__x, _y, MapBlock.Barrier] == 1:
+                            cnt += 1
+
+                for __y in range(_y - bomb_range, _y + bomb_range + 1):
+                    if 0 <= __y < self.map_size:
+                        temp_map[_x, __y] = 0
+                        if self.map[_x, __y, MapBlock.Barrier] == 1:
+                            cnt += 1
+                
+                if np.sum(temp_map) > 0 and cnt != 0:
+                    coordinates = np.where(temp_map == 1)
+                    result.append(((_x, _y), cnt, list(zip(coordinates[0], coordinates[1]))))
+
+        return result
+
+    
+    def goToTarget(self, target:tuple=None) -> list:
+        """calculate the path to the target and return the path"""
+        visited = set()
+        queue = deque([(self.player_info['pos'], [])])  
+        
+        while len(queue):
+            (x, y), path = queue.popleft()
+            if not target and self.map[x, y, MapBlock.BombCover] == 0:
+                path.append((x, y))
+                return path
+            if target and (x, y) == target :
+                path.append((x, y))
+                return path
+            
+            for dx, dy in self.DIRECTIONS:
+                _x = x + dx
+                _y = y + dy
+                if 0 <= _x < self.map_size and 0 <= _y < self.map_size and (_x, _y) not in visited \
+                        and self.map[_x, _y, MapBlock.Wall] == 0 and self.map[_x, _y, MapBlock.Barrier] == 0:
+                    visited.add((_x, _y))
+                    queue.append(((_x, _y), path + [(x, y)]))
+        return []
 
     def updateMap(self, map_data:dict) -> dict:
         """Update map and player positions"""
@@ -277,7 +377,7 @@ class Bot:
             else:
                 for obj in cell.objs:
                     if obj.type == ObjType.Player:
-                        self.map[x, y, self.updatePlayer(obj.property, [x, y])] = 1
+                        self.map[x, y, self.updatePlayer(obj.property, (x, y))] = 1
 
                     elif obj.type == ObjType.Bomb:
                         # The impact range of the bomb explosion
@@ -333,7 +433,7 @@ def test():
 
 def main():
     with Client() as client:
-        bot = Bot(show_ui=False)
+        bot = Bot(show_ui=True)
         bot.setCLient(client)
         bot.run(out=False)
 
